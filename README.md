@@ -11,17 +11,26 @@
 
 To Do List 🌞
 
-Front-end ->
+### Front-end ->
+
 [ ] Fazer integração com o Backend
+<br>
 [ ] Ajustar campos dos modais de inserção com os campos que possui na listagem
+<br>
 [ ] Ajustar campo de filtrar clientes
+<br>
 [ ] Dar funcionalidades ao botão de edição
+<br>
 [ ] Dar funcionalidades ao botão de excluão
 
-Banco de Dados ->
+### Banco de Dados ->
+
 [ ] Criar Mock de Clientes
+<br>
 [ ] Criar Mock de Fornecedores
+<br>
 [ ] Criar Mock de Produtos
+<br>
 [ ] Criar modelagem para cada uma das 3 tabelas
 
 ## :checkered_flag: Começando
