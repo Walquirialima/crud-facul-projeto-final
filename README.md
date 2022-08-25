@@ -32,6 +32,8 @@ To Do List 🌞
 [ ] Criar Mock de Produtos
 <br>
 [ ] Criar modelagem para cada uma das 3 tabelas
+<br>
+[ ] Ajustar Responsividade
 
 ## :checkered_flag: Começando
 
