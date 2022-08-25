@@ -3,26 +3,41 @@
 </h1>
 
 <p align="center">
-  Accident 🚀
+  Sistema de  Gerenciamento  🚀
   <br>
   <br>
 
 </p>
 
+To Do List 🌞
+
+Front-end ->
+[ ] Fazer integração com o Backend
+[ ] Ajustar campos dos modais de inserção com os campos que possui na listagem
+[ ] Ajustar campo de filtrar clientes
+[ ] Dar funcionalidades ao botão de edição
+[ ] Dar funcionalidades ao botão de excluão
+
+Banco de Dados ->
+[ ] Criar Mock de Clientes
+[ ] Criar Mock de Fornecedores
+[ ] Criar Mock de Produtos
+[ ] Criar modelagem para cada uma das 3 tabelas
+
 ## :checkered_flag: Começando
 
 ```bash
 # Clone this project
-$ git clone https://github.com/Gustavo-Developer/Frontend-Accidents
+$ git clone https://github.com/Gustavo-Developer/CrudImpacta
 
 # Access
-$ cd Frontend-Accidents
+$ cd CrudImpact
 
 # Install dependencies
 $ npm i
 
-# Install dependencies
-$ npm run
+# Start Aplication
+$ npm run start
 
 ```
 
@@ -30,4 +45,4 @@ $ npm run
 
 <h1 align="center">
     <img alt = "Web app" src = "./.github/home.png" width = "100%" />
-</h1># Accidents
+</h1># Sistema de gerenciamento
