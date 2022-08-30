@@ -22,18 +22,18 @@ To Do List 🌞
 [ ] Dar funcionalidades ao botão de edição
 <br>
 [ ] Dar funcionalidades ao botão de excluão
+<br>
+[ ] Ajustar Responsividade
 
 ### Banco de Dados ->
 
-[ ] Criar Mock de Clientes
+[ x ] Criar Mock de Clientes
 <br>
-[ ] Criar Mock de Fornecedores
+[ x ] Criar Mock de Fornecedores
 <br>
-[ ] Criar Mock de Produtos
+[ x ] Criar Mock de Produtos
 <br>
-[ ] Criar modelagem para cada uma das 3 tabelas
-<br>
-[ ] Ajustar Responsividade
+[ x ] Criar modelagem para cada uma das 3 tabelas
 
 ## :checkered_flag: Começando
 
