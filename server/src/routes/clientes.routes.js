@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { db } from "../data/mysql";
+import { db } from "../data/mysql.js";
 
 const clientesRoutes = Router();
 

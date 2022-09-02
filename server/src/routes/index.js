@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { produtosRoutes } from "./produtos.routes";
-import { fornecedoresRoutes } from "./fornecedores.routes";
-import { clientesRoutes } from "./clientes.routes";
+import { produtosRoutes } from "./produtos.routes.js";
+import { fornecedoresRoutes } from "./fornecedores.routes.js";
+import { clientesRoutes } from "./clientes.routes.js";
 
 const router = Router();
 
