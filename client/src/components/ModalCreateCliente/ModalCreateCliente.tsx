@@ -36,6 +36,27 @@ const ModalCreateCliente = () => {
   const handleClose = () => setOpen(false);
   const formMethods = useForm<FormData>();
 
+  const onClickCadastrar = () => {
+    const form = formMethods.getValues();
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nome: form.name,
+        nascimento: form.birthday,
+        endereco: form.street,
+        cidade: form.city,
+        cpf: form.cpf,
+      }),
+    };
+
+    fetch("http://localhost:8080/api/clientes", requestOptions).then((data) => {
+      console.log(data);
+      handleClose();
+      document.location.reload();
+    });
+  };
+
   return (
     <div>
       <Button
@@ -183,7 +204,7 @@ const ModalCreateCliente = () => {
                   disableElevation
                   fullWidth
                   sx={{ borderRadius: "24px", marginBottom: "30px" }}
-                  //onClick={formMethods.handleSubmit(onSubmit)}
+                  onClick={onClickCadastrar}
                   size="large"
                   variant="contained"
                 >

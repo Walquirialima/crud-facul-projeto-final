@@ -11,6 +11,8 @@ import {
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import React from "react";
+const { useState, useEffect } = React;
 
 function createData(
   companyName: string,
@@ -25,27 +27,6 @@ function createData(
     city,
   };
 }
-
-const rows = [
-  createData(
-    "JR Embalagens ",
-    "005.451.1820/0001-19",
-    "Rua Numero 0, 125",
-    "São paulo"
-  ),
-  createData(
-    "JR Embalagens ",
-    "005.451.1820/0001-19",
-    "Rua Numero 0, 125",
-    "São paulo"
-  ),
-  createData(
-    "JR Embalagens ",
-    "005.451.1820/0001-19",
-    "Rua Numero 0, 125",
-    "São paulo"
-  ),
-];
 
 const headCells = [
   {
@@ -71,6 +52,20 @@ const headCells = [
 ];
 
 export default function ClientView() {
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/fornecedores/")
+      .then((response) => response.json())
+      .then((data) => {
+        const _rows: any = [];
+        data.forEach((fornecedor: any) => {
+          _rows.push(fornecedor);
+        });
+        setRows(_rows);
+      });
+  }, []);
+
   return (
     <TableContainer>
       <Table>
@@ -94,18 +89,18 @@ export default function ClientView() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.companyName}>
-              <TableCell>{row.companyName}</TableCell>
+          {rows.map((row: any) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.nomeEmpresa}</TableCell>
 
               <TableCell>
                 <Chip label={row.cnpj} />
               </TableCell>
               <TableCell>
-                <Chip label={row.adress} />
+                <Chip label={row.endereco} />
               </TableCell>
               <TableCell>
-                <Chip label={row.city} />
+                <Chip label={row.cidade} />
               </TableCell>
               <TableCell>
                 <Box alignItems="center" display="flex">

@@ -11,19 +11,8 @@ import {
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-function createData(productName: string, company: string) {
-  return {
-    productName,
-    company,
-  };
-}
-
-const rows = [
-  createData("Caixote de madeira", "Jr Embalagens"),
-  createData("Caixote de madeira", "Jr Embalagens"),
-  createData("Caixote de madeira", "Jr Embalagens"),
-];
+import React from "react";
+const { useState, useEffect } = React;
 
 const headCells = [
   {
@@ -41,6 +30,20 @@ const headCells = [
 ];
 
 export default function ProdutoView() {
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/produtos/")
+      .then((response) => response.json())
+      .then((data) => {
+        const _rows: any = [];
+        data.forEach((produto: any) => {
+          _rows.push(produto);
+        });
+        setRows(_rows);
+      });
+  }, []);
+
   return (
     <TableContainer>
       <Table>
@@ -64,12 +67,12 @@ export default function ProdutoView() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.productName}>
-              <TableCell>{row.productName}</TableCell>
+          {rows.map((row: any) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.nomeProduto}</TableCell>
 
               <TableCell>
-                <Chip label={row.company} />
+                <Chip label={row.nomeEmpresa} />
               </TableCell>
               <TableCell>
                 <Box alignItems="center" display="flex">
