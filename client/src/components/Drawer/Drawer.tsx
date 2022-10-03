@@ -173,8 +173,9 @@ function AppBarContent() {
                   justifyContent="center"
                 >
                   <ModalCreateCliente />
-                  {/* <Box paddingX={3} paddingY={1} />
+                  <Box paddingX={3} paddingY={1} />
                   <ModalCreateFornecedor />
+                  {/*
                   <Box paddingX={3} paddingY={1} />
                   <ModalCreateProduto /> */}
                 </Grid>
@@ -184,10 +185,11 @@ function AppBarContent() {
                 <ClientView />
               </Grid>
 
-              {/* <Grid item xs={12} md={12} lg={12} paddingY={3}>
+              <Grid item xs={12} md={12} lg={12} paddingY={3}>
                 <FornecedorView />
               </Grid>
 
+              {/*
               <Grid item xs={12} md={12} lg={12} paddingY={3}>
                 <ProdutoView />
               </Grid> */}

@@ -24,8 +24,7 @@ const style = {
 
 interface FormData {
   name: string;
-  cpf: string;
-  birthday: string;
+  cnpj: string;
   street: string;
   city: string;
 }
@@ -35,6 +34,28 @@ const ModalCreateFornecedor = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const formMethods = useForm<FormData>();
+
+  const onClickCadastrar = () => {
+    const form = formMethods.getValues();
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nome: form.name,
+        endereco: form.street,
+        cidade: form.city,
+        cnpj: form.cnpj,
+      }),
+    };
+
+    fetch("http://localhost:8080/api/fornecedores", requestOptions).then(
+      (data) => {
+        console.log(data);
+        handleClose();
+        document.location.reload();
+      }
+    );
+  };
 
   return (
     <div>
@@ -99,8 +120,8 @@ const ModalCreateFornecedor = () => {
                         }}
                         autoComplete="name"
                         autoFocus
-                        name="cpf"
-                        label="CPF"
+                        name="cnpj"
+                        label="CNPJ"
                         required
                         rules={
                           {
@@ -110,28 +131,7 @@ const ModalCreateFornecedor = () => {
                       />
                     </FormProvider>
                   </Grid>
-                  <Grid item xs={12}>
-                    <FormProvider {...formMethods}>
-                      <FormInput<FormData>
-                        InputProps={{
-                          sx: {
-                            borderRadius: "24px",
-                            marginBottom: "10px",
-                          },
-                        }}
-                        autoComplete="email"
-                        autoFocus
-                        name="birthday"
-                        label="Nascimento"
-                        required
-                        rules={
-                          {
-                            //  ...loginValidators(t).email,
-                          }
-                        }
-                      />
-                    </FormProvider>
-                  </Grid>
+
                   <Grid item xs={12}>
                     <FormProvider {...formMethods}>
                       <FormInput<FormData>
@@ -183,7 +183,7 @@ const ModalCreateFornecedor = () => {
                   disableElevation
                   fullWidth
                   sx={{ borderRadius: "24px", marginBottom: "30px" }}
-                  //onClick={formMethods.handleSubmit(onSubmit)}
+                  onClick={onClickCadastrar}
                   size="large"
                   variant="contained"
                 >

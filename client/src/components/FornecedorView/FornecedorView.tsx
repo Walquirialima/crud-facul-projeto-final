@@ -55,23 +55,45 @@ export default function ClientView() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/fornecedores/")
+    fetch("http://localhost:8080/api/fornecedores")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         const _rows: any = [];
         data.forEach((fornecedor: any) => {
           _rows.push(fornecedor);
         });
+        // this.setState({ rows: rows });
         setRows(_rows);
+        console.log(data, rows);
       });
   }, []);
 
+  const onClickDeletar = (id: any) => {
+    console.log(id);
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
+    };
+
+    fetch("http://localhost:8080/api/fornecedores" + id, requestOptions).then(
+      (data) => {
+        setRows(rows.filter((row: any) => row.id !== id));
+      }
+    );
+  };
+
   return (
-    <TableContainer>
+    <TableContainer
+      sx={{
+        borderRadius: "26px",
+      }}
+    >
       <Table>
         <TableHead
           sx={{
-            backgroundColor: "#2E3191",
+            backgroundColor: "#000000",
             borderRadius: "16px",
           }}
         >
@@ -91,7 +113,7 @@ export default function ClientView() {
         <TableBody>
           {rows.map((row: any) => (
             <TableRow key={row.id}>
-              <TableCell>{row.nomeEmpresa}</TableCell>
+              <TableCell>{row.nome}</TableCell>
 
               <TableCell>
                 <Chip label={row.cnpj} />
@@ -105,7 +127,10 @@ export default function ClientView() {
               <TableCell>
                 <Box alignItems="center" display="flex">
                   <EditIcon color="primary" />
-                  <DeleteIcon color="primary" />
+                  <DeleteIcon
+                    color="primary"
+                    onClick={() => onClickDeletar(row.id)}
+                  />
                 </Box>
               </TableCell>
             </TableRow>

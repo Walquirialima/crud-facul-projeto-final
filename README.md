@@ -9,31 +9,60 @@
 
 </p>
 
-To Do List 🌞
+## Mock MySQL Database
 
-### Front-end ->
+```bash
+CREATE DATABASE IF NOT EXISTS impactaSistema;
 
-[ ] Fazer integração com o Backend
-<br>
-[ ] Ajustar campos dos modais de inserção com os campos que possui na listagem
-<br>
-[ ] Ajustar campo de filtrar clientes
-<br>
-[ ] Dar funcionalidades ao botão de edição
-<br>
-[ ] Dar funcionalidades ao botão de excluão
-<br>
-[ ] Ajustar Responsividade
+SELECT * FROM clientes;
 
-### Banco de Dados ->
+USE impactaSistema;
+CREATE TABLE IF NOT EXISTS clientes
+(
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(70) NOT NULL,
+cpf VARCHAR(70) NOT NULL,
+nascimento VARCHAR(70) NOT NULL,
+endereco VARCHAR(70) NOT NULL,
+cidade VARCHAR(70) NOT NULL
+);
 
-[ x ] Criar Mock de Clientes
-<br>
-[ x ] Criar Mock de Fornecedores
-<br>
-[ x ] Criar Mock de Produtos
-<br>
-[ x ] Criar modelagem para cada uma das 3 tabelas
+
+INSERT INTO clientes ( nome,cpf, nascimento, endereco, cidade)
+VALUES ('Gustavo Mendes','123.542.678-01','07/07/2002','Rua dos bobos, Nº0','São Paulo');
+INSERT INTO clientes ( nome,cpf, nascimento, endereco, cidade)
+VALUES ('Renata Santos','123.542.354-01','07/07/2002','Rua dos bobos, Nº0','Ceara');
+INSERT INTO clientes ( nome,cpf, nascimento, endereco, cidade)
+VALUES ('Carla Souza','345.542.678-01','07/07/2002','Rua dos bobos, Nº0','Rio de Janeiro');
+INSERT INTO clientes ( nome,cpf, nascimento, endereco, cidade)
+VALUES ('Debora mato','123.456.678-01','07/07/2002','Rua dos bobos, Nº0','São Paulo');
+
+USE impactaSistema;
+CREATE TABLE IF NOT EXISTS fornecedores
+(
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(70) NOT NULL,
+cnpj VARCHAR(70) NOT NULL,
+endereco VARCHAR(70) NOT NULL,
+cidade VARCHAR(70) NOT NULL
+);
+
+
+INSERT INTO fornecedores ( nome, cnpj, endereco, cidade)
+VALUES ('AM Materiais','25.367.578/0001-01','Rua dos bobos, Nº0','São Paulo');
+
+INSERT INTO fornecedores ( nome, cnpj,  endereco, cidade)
+VALUES ('Contruções LT','92.103.798/0001-15','Rua dos bobos, Nº0','Ceara');
+
+INSERT INTO fornecedores ( nome, cnpj, endereco, cidade)
+VALUES ('Seven Mateirais','92.103.798/0001-15','Rua dos bobos, Nº0','Rio de Janeiro');
+
+INSERT INTO fornecedores ( nome, cnpj, endereco, cidade)
+VALUES ('Casa da Ferragem','59.631.713/0001-04','Rua dos bobos, Nº0','São Paulo');
+
+SELECT * FROM fornecedores;
+DROP TABLE impactaSistema.fornecedores;
+```
 
 ## :checkered_flag: Começando
 
