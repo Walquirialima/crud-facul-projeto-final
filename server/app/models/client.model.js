@@ -17,7 +17,7 @@ Client.create = (newClient, result) => {
       return;
     }
 
-    console.log("created client: ", { id: res.insertId, ...newClient });
+    //console.log("created client: ", { id: res.insertId, ...newClient });
     result(null, { id: res.insertId, ...newClient });
   });
 };
@@ -25,13 +25,13 @@ Client.create = (newClient, result) => {
 Client.findById = (id, result) => {
   sql.query(`SELECT * FROM clientes WHERE id = ${id}`, (err, res) => {
     if (err) {
-      console.log("error: ", err);
+      //console.log("error: ", err);
       result(err, null);
       return;
     }
 
     if (res.length) {
-      console.log("found client: ", res[0]);
+      //console.log("found client: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -55,7 +55,7 @@ Client.getAll = (title, result) => {
       return;
     }
 
-    console.log("clientes: ", res);
+    //console.log("clientes: ", res);
     result(null, res);
   });
 };
@@ -67,7 +67,8 @@ Client.updateById = (id, client, result) => {
       client.nome,
       client.cpf,
       client.nascimento,
-      client.endereco.client.cidade,
+      client.endereco,
+      client.cidade,
       id,
     ],
     (err, res) => {
@@ -83,7 +84,7 @@ Client.updateById = (id, client, result) => {
         return;
       }
 
-      console.log("updated client: ", { id: id, ...client });
+      //console.log("updated client: ", { id: id, ...client });
       result(null, { id: id, ...client });
     }
   );
@@ -116,7 +117,7 @@ Client.removeAll = (result) => {
       return;
     }
 
-    console.log(`deleted ${res.affectedRows} clientes`);
+    //console.log(`deleted ${res.affectedRows} clientes`);
     result(null, res);
   });
 };

@@ -74,7 +74,7 @@ exports.findAllPublished = (req, res) => {
 
 // Update a Client identified by the id in the request
 exports.update = (req, res) => {
-  // Validate Request
+  //Validate Request
   if (!req.body) {
     res.status(400).send({
       message: "Content can not be empty!",
@@ -96,6 +96,8 @@ exports.update = (req, res) => {
       }
     } else res.send(data);
   });
+
+  console.log("xxxxxxxxxx", req.body);
 };
 
 // Delete a Client with the specified id in the request

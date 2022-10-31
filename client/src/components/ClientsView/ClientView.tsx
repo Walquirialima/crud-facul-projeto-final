@@ -13,13 +13,13 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
 
+import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm, useFormState } from "react-hook-form";
 import FormInput from "../FormInput";
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 const style = {
   position: "absolute" as "absolute",
@@ -70,12 +70,25 @@ interface FormData {
 
 export default function ClientView() {
   const [rows, setRows] = useState([]);
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [open, setOpen] = React.useState("0");
+  const handleOpen = (id: string) => setOpen(id);
+  const handleClose = () => setOpen("");
   const formMethods = useForm<FormData>();
+  const ref = useRef(null);
+
+  const handleChange = (row: any, attr: string, e: any) => {
+    row[attr] = e.target.value;
+    const _rows: any = rows.map((r: any) => {
+      if (r.id == row.id) {
+        r = row;
+      }
+      return r;
+    });
+    setRows(_rows);
+  };
 
   useEffect(() => {
+    handleClose();
     fetch("http://localhost:8080/api/clientes")
       .then((response) => response.json())
       .then((data) => {
@@ -98,28 +111,21 @@ export default function ClientView() {
       body: JSON.stringify({}),
     };
 
-    fetch("http://localhost:8080/api/clientes" + id, requestOptions).then(
+    fetch("http://localhost:8080/api/clientes/" + id, requestOptions).then(
       (data) => {
         setRows(rows.filter((row: any) => row.id !== id));
       }
     );
   };
 
-  const onClickEditar = (id: any) => {
-    const form = formMethods.getValues();
+  const onClickEditar = (row: any) => {
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        nome: form.name,
-        nascimento: form.birthday,
-        endereco: form.street,
-        cidade: form.city,
-        cpf: form.cpf,
-      }),
+      body: JSON.stringify(row),
     };
 
-    fetch("http://localhost:8080/api/clientes" + id, requestOptions).then(
+    fetch("http://localhost:8080/api/clientes/" + row.id, requestOptions).then(
       (data) => {
         console.log(data);
         handleClose();
@@ -171,11 +177,14 @@ export default function ClientView() {
                 </TableCell>
                 <TableCell>
                   <Box alignItems="center" display="flex">
-                    <EditIcon color="primary" onClick={() => handleOpen()} />
+                    <EditIcon
+                      color="primary"
+                      onClick={() => handleOpen(row.id)}
+                    />
                     <Modal
                       aria-labelledby="transition-modal-title"
                       aria-describedby="transition-modal-description"
-                      open={open}
+                      open={open == row.id}
                       onClose={handleClose}
                       closeAfterTransition
                       BackdropComponent={Backdrop}
@@ -183,7 +192,7 @@ export default function ClientView() {
                         timeout: 500,
                       }}
                     >
-                      <Fade in={open}>
+                      <Fade in={open == row.id}>
                         <Box sx={style}>
                           <Grid
                             container
@@ -206,8 +215,9 @@ export default function ClientView() {
                                           borderRadius: "24px",
                                         },
                                       }}
-                                      autoComplete="name"
-                                      autoFocus
+                                      onChange={(e) =>
+                                        handleChange(row, "nome", e)
+                                      }
                                       name="name"
                                       label="Nome"
                                       value={row.nome}
@@ -228,8 +238,9 @@ export default function ClientView() {
                                           borderRadius: "24px",
                                         },
                                       }}
-                                      autoComplete="name"
-                                      autoFocus
+                                      onChange={(e) =>
+                                        handleChange(row, "cpf", e)
+                                      }
                                       name="cpf"
                                       value={row.cpf}
                                       required
@@ -250,6 +261,9 @@ export default function ClientView() {
                                           marginBottom: "10px",
                                         },
                                       }}
+                                      onChange={(e) =>
+                                        handleChange(row, "nascimento", e)
+                                      }
                                       autoFocus
                                       name="birthday"
                                       value={row.nascimento}
@@ -271,9 +285,11 @@ export default function ClientView() {
                                           marginBottom: "10px",
                                         },
                                       }}
-                                      autoFocus
+                                      onChange={(e) =>
+                                        handleChange(row, "endereco", e)
+                                      }
                                       name="street"
-                                      value={row.cidade}
+                                      value={row.endereco}
                                       required
                                       rules={
                                         {
@@ -292,8 +308,9 @@ export default function ClientView() {
                                           marginBottom: "10px",
                                         },
                                       }}
-                                      autoComplete="email"
-                                      autoFocus
+                                      onChange={(e) =>
+                                        handleChange(row, "cidade", e)
+                                      }
                                       name="city"
                                       value={row.cidade}
                                       required
@@ -315,7 +332,7 @@ export default function ClientView() {
                                   borderRadius: "24px",
                                   marginBottom: "30px",
                                 }}
-                                onClick={() => onClickEditar(row.id)}
+                                onClick={() => onClickEditar(row)}
                                 size="large"
                                 variant="contained"
                               >

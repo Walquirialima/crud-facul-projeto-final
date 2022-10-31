@@ -37,6 +37,7 @@ const ModalCreateCliente = () => {
   const formMethods = useForm<FormData>();
 
   const onClickCadastrar = () => {
+    debugger;
     const form = formMethods.getValues();
     const requestOptions = {
       method: "POST",

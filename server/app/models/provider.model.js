@@ -62,7 +62,7 @@ Provider.getAll = (title, result) => {
 Provider.updateById = (id, provider, result) => {
   sql.query(
     "UPDATE fornecedores SET nome = ?, cnpj = ?, endereco = ?, cidade = ? WHERE id = ?",
-    [provider.nome, provider.cnpj, provider.endereco.provider.cidade, id],
+    [provider.nome, provider.cnpj, provider.endereco, provider.cidade, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
