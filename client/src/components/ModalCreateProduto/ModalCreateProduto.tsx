@@ -23,9 +23,8 @@ const style = {
 };
 
 interface FormData {
-  plate: string;
-  incident: string;
-  involved: string;
+  nomeProduto: string;
+  nomeEmpresa: string;
 }
 
 const ModalCreateProduto = () => {
@@ -33,6 +32,27 @@ const ModalCreateProduto = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const formMethods = useForm<FormData>();
+
+  const onClickCadastrar = () => {
+    debugger;
+    const form = formMethods.getValues();
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nomeProduto: form.nomeProduto,
+        nomeEmpresa: form.nomeEmpresa,
+      }),
+    };
+
+    fetch("http://localhost:8080/api/produtos/", requestOptions).then(
+      (data) => {
+        console.log(data);
+        handleClose();
+        document.location.reload();
+      }
+    );
+  };
 
   return (
     <div>
@@ -42,7 +62,7 @@ const ModalCreateProduto = () => {
         endIcon={<AddIcon />}
         color="success"
       >
-        Cadastrar produto
+        Cadastrar produtos
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -74,10 +94,10 @@ const ModalCreateProduto = () => {
                             borderRadius: "24px",
                           },
                         }}
-                        autoComplete="name"
+                        autoComplete="nomeProduto"
                         autoFocus
-                        name="plate"
-                        label="Placa do carro"
+                        name="nomeProduto"
+                        label="Nome do Produto"
                         required
                         rules={
                           {
@@ -95,32 +115,10 @@ const ModalCreateProduto = () => {
                             borderRadius: "24px",
                           },
                         }}
-                        autoComplete="name"
+                        autoComplete="nomeEmpresa"
                         autoFocus
-                        name="involved"
-                        label="Envolvidos"
-                        required
-                        rules={
-                          {
-                            //  ...loginValidators(t).email,
-                          }
-                        }
-                      />
-                    </FormProvider>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormProvider {...formMethods}>
-                      <FormInput<FormData>
-                        InputProps={{
-                          sx: {
-                            borderRadius: "24px",
-                            marginBottom: "10px",
-                          },
-                        }}
-                        autoComplete="email"
-                        autoFocus
-                        name="incident"
-                        label="Como aconteceu o acidente"
+                        name="nomeEmpresa"
+                        label="Nome da Empresa"
                         required
                         rules={
                           {
@@ -137,7 +135,7 @@ const ModalCreateProduto = () => {
                   disableElevation
                   fullWidth
                   sx={{ borderRadius: "24px", marginBottom: "30px" }}
-                  //onClick={formMethods.handleSubmit(onSubmit)}
+                  onClick={onClickCadastrar}
                   size="large"
                   variant="contained"
                 >

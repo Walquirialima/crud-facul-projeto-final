@@ -175,9 +175,8 @@ function AppBarContent() {
                   <ModalCreateCliente />
                   <Box paddingX={3} paddingY={1} />
                   <ModalCreateFornecedor />
-                  {/*
                   <Box paddingX={3} paddingY={1} />
-                  <ModalCreateProduto /> */}
+                  <ModalCreateProduto />
                 </Grid>
               </Grid>
 
@@ -189,10 +188,9 @@ function AppBarContent() {
                 <FornecedorView />
               </Grid>
 
-              {/*
               <Grid item xs={12} md={12} lg={12} paddingY={3}>
                 <ProdutoView />
-              </Grid> */}
+              </Grid>
             </Grid>
           </Container>
         </Box>
